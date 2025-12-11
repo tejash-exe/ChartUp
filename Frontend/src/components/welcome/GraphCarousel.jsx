@@ -47,7 +47,7 @@ const GraphCarousel = ({ graph, defaultGraphType = "Bar", isType = false, isDown
         const url = tmp.toDataURL("image/jpeg", 3.0);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `${graphs[selectedGraph].title || "chart"}.jpg`;
+        link.download = "chart.jpg";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
