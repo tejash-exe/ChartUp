@@ -64,6 +64,7 @@ const useGraphsAutosave = () => {
         if (result.status == 200) {
           lastSavedSnapshotRef.current = snapshot;
           if (unsavedRef) unsavedRef.current = false;
+          console.log("Saved");
         }
         else if (result.status == 469) {
           notify("Session Expired", 5000, "Warning");

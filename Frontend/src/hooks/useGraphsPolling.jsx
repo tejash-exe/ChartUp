@@ -63,6 +63,7 @@ const useGraphsPolling = () => {
           if (lastUpdatedRef.current !== updatedAt) {
             lastUpdatedRef.current = updatedAt;
             setGraphs(serverGraphs || []);
+            console.log("Graphs Updated!");
           }
         }
         else if (result.status == 469) {
