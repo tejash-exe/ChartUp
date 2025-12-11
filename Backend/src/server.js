@@ -3,7 +3,7 @@ import connectToDb from "./db/db.js";
 // App
 import app from "./app.js";
 // Packages
-import 'dotenv/config.js';
+import "dotenv/config";
 
 connectToDb()
 .then( () => {
