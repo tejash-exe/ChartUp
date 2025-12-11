@@ -8,11 +8,11 @@ import { faTv } from "@fortawesome/free-solid-svg-icons";
 
 const ThemeSelector = () => {
 
-    const { theme, setTheme } = useContext(AppContext);
+    const { theme, setTheme, setThemeOption } = useContext(AppContext);
     const themeDropdownRef = useRef(null);
     const [themeOpen, setThemeOpen] = useState(false);
 
-    const currentIcon = theme === "dark" ? faMoon : (theme === "system") ? faTv : faSun;
+    const currentIcon = theme === "dark" ? faMoon : faSun;
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -27,7 +27,7 @@ const ThemeSelector = () => {
     }, []);
 
     const handleThemeChange = (value) => {
-        setTheme(value);
+        setThemeOption(value);
         setThemeOpen(false);
     };
 

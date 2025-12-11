@@ -27,8 +27,9 @@ export const AppProvider = ({ children }) => {
   });
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "system");
+  const [themeOption, setThemeOption] = useState(localStorage.getItem("themeOption") || "system");
 
-  useTheme(theme, setTheme);
+  useTheme(themeOption, setTheme);
 
   useEffect(() => {
     setSelectedGraph((prev) => {
@@ -74,6 +75,10 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    localStorage.setItem("themeOption", themeOption);
+  }, [themeOption]);
+
   return (
     <AppContext.Provider
       value={{
@@ -102,6 +107,9 @@ export const AppProvider = ({ children }) => {
 
         theme,
         setTheme,
+
+        themeOption,
+        setThemeOption,
       }}>
       {children}
     </AppContext.Provider>

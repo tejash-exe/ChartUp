@@ -1,42 +1,42 @@
 import { useEffect } from "react";
 
-const useTheme = (theme, setTheme) => {
-
+const useTheme = (themeOption, setTheme) => {
   const apply = (value) => {
     const root = document.documentElement;
     if (value === "dark") root.classList.add("dark");
     else root.classList.remove("dark");
   };
 
+  // Resolve final theme whenever themeOption changes
   useEffect(() => {
-    if (theme === "system") {
+    let finalTheme;
+
+    if (themeOption === "system") {
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const newTheme = prefersDark ? "dark" : "light";
-      setTheme(newTheme);
-      apply(newTheme);
-      return;
+      finalTheme = prefersDark ? "dark" : "light";
+    } else {
+      finalTheme = themeOption; // already "light" or "dark"
     }
 
-    apply(theme);
-  }, [theme, setTheme]);
+    setTheme(finalTheme);
+    apply(finalTheme);
+  }, [themeOption, setTheme]);
 
+  // Update on system theme change (only when option = system)
   useEffect(() => {
+    if (themeOption !== "system") return;
+
     const media = window.matchMedia("(prefers-color-scheme: dark)");
 
     const handler = () => {
-      if (theme === "light" || theme === "dark") {
-        return;
-      }
-
-      const prefersDark = media.matches;
-      const newTheme = prefersDark ? "dark" : "light";
-      setTheme(newTheme);
-      apply(newTheme);
+      const finalTheme = media.matches ? "dark" : "light";
+      setTheme(finalTheme);
+      apply(finalTheme);
     };
 
     media.addEventListener("change", handler);
     return () => media.removeEventListener("change", handler);
-  }, [theme, setTheme]);
+  }, [themeOption, setTheme]);
 
   return null;
 };
