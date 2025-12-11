@@ -1,5 +1,28 @@
 <!doctype html>
 <html lang="en">
+  <script>
+  (function() {
+    try {
+      const stored = localStorage.getItem('themeOption');
+      if (stored === 'light') {
+        document.documentElement.classList.remove('dark');
+        return;
+      }
+      if (stored === 'dark') {
+        document.documentElement.classList.add('dark');
+        return;
+      }
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDark) document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    } catch (e) {
+      try {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    }
+  })();
+</script>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.png" />

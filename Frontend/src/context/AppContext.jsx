@@ -26,7 +26,7 @@ export const AppProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "system");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
   const [themeOption, setThemeOption] = useState(localStorage.getItem("themeOption") || "system");
 
   useTheme(themeOption, setTheme);
