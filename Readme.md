@@ -1,6 +1,6 @@
 # 📊 ChartUp – Beautiful, Fast & Interactive Graph Builder
 
-**Modern glass-UI graph creator with multi-type charts, autosave, Google login, and PNG export.**
+**Modern glass-UI graph creator with multi-type charts, autosave, Google login, and Image export.**
 
 ChartUp is a lightweight yet powerful tool for creating visually appealing graphs with a sleek glass-inspired interface.
 Designed for speed, simplicity, and aesthetics — perfect for quick data visualization, presentations, or notes.
@@ -38,7 +38,7 @@ Designed for speed, simplicity, and aesthetics — perfect for quick data visual
 
 ### 🖼 Export
 
-* Export any chart as PNG
+* Export any chart as Image
 
 
 ## 🛠 Tech Stack

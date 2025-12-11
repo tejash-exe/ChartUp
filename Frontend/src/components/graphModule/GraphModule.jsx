@@ -16,13 +16,13 @@ import GraphTypeSelector from "./GraphTypeSelector.jsx";
 import TitleInput from "./TitleInput.jsx";
 
 const GraphModule = ({ graph }) => {
-    
-    const { isAuth, graphs, selectedGraph, setGraphs, setSelectedGraph } = useContext(AppContext);
+
+    const { isAuth, graphs, selectedGraph, setGraphs, setSelectedGraph, theme } = useContext(AppContext);
     const { isSaving, savingError } = useNotifications();
     const chartRef = useRef(null);
 
     const markLocalEdits = useMarkLocalEdits();
-    
+
     const activeGraph = selectedGraph !== null ? graphs[selectedGraph] : null;
     const graphType = activeGraph?.type || "Bar";
 
@@ -30,10 +30,23 @@ const GraphModule = ({ graph }) => {
         const chart = chartRef.current;
         if (!chart) return;
 
-        const url = chart.toBase64Image();
+        const canvas = chart.canvas;
+
+        const tmp = document.createElement("canvas");
+        tmp.width = canvas.width;
+        tmp.height = canvas.height;
+        const ctx = tmp.getContext("2d");
+
+        const bgColor = theme === "dark" ? "#0b1220" : "#ffffff";
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, tmp.width, tmp.height);
+
+        ctx.drawImage(canvas, 0, 0, tmp.width, tmp.height);
+
+        const url = tmp.toDataURL("image/jpeg", 3.0);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `${graphs[selectedGraph].title}.png`;
+        link.download = `${graphs[selectedGraph].title || "chart"}.jpg`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -69,7 +82,7 @@ const GraphModule = ({ graph }) => {
                 <div className="flex h-min mb-2 justify-between items-center">
                     <TitleInput />
                     <div className='flex justify-end gap-4 items-center'>
-                        <button onClick={handleDownloadPng} className="shrink-0 md:w-10 md:h-10 w-8 h-8 outline-none flex items-center border border-white justify-center rounded-full shadow-sm duration-200 cursor-pointer bg-white hover:bg-white/20 hover:backdrop-blur-xs dark:border-gray-400/40 dark:hover:text-white dark:hover:bg-transparent" title='Download PNG'>
+                        <button onClick={handleDownloadPng} className="shrink-0 md:w-10 md:h-10 w-8 h-8 outline-none flex items-center border border-white justify-center rounded-full shadow-sm duration-200 cursor-pointer bg-white hover:bg-white/20 hover:backdrop-blur-xs dark:border-gray-400/40 dark:hover:text-white dark:hover:bg-transparent" title='Download Image'>
                             <FontAwesomeIcon icon={faDownload} />
                         </button>
                         <GraphTypeSelector graphType={graphType} />
@@ -89,11 +102,11 @@ const GraphModule = ({ graph }) => {
                 </div>
             </div>
             <div className="flex justify-between items-center mx-2 my-4">
-                {isAuth && isSaving && <div className='text-slate-500'><FontAwesomeIcon className='mr-1 animate-spin' icon={faArrowsRotate}/>Autosaving</div>}
-                {isAuth && !isSaving && savingError && <div className='text-slate-500'><FontAwesomeIcon className='mr-1' icon={faTriangleExclamation}/>Error while saving</div>}
-                {isAuth && !isSaving && !savingError && <div className='text-slate-500'><FontAwesomeIcon className='mr-1' icon={faFloppyDisk}/>Autosaved</div>}
+                {isAuth && isSaving && <div className='text-slate-500'><FontAwesomeIcon className='mr-1 animate-spin' icon={faArrowsRotate} />Autosaving</div>}
+                {isAuth && !isSaving && savingError && <div className='text-slate-500'><FontAwesomeIcon className='mr-1' icon={faTriangleExclamation} />Error while saving</div>}
+                {isAuth && !isSaving && !savingError && <div className='text-slate-500'><FontAwesomeIcon className='mr-1' icon={faFloppyDisk} />Autosaved</div>}
                 {!isAuth && <div></div>}
-                <button onClick={handleDeleteGraph} className="border-2 rounded-md text-sm px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-500/60 shadow-sm duration-200 border-red-500"><FontAwesomeIcon className='mr-1' icon={faTrash}/>Delete graph</button>
+                <button onClick={handleDeleteGraph} className="border-2 rounded-md text-sm px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-500/60 shadow-sm duration-200 border-red-500"><FontAwesomeIcon className='mr-1' icon={faTrash} />Delete graph</button>
             </div>
         </div>
     );

@@ -98,7 +98,7 @@ const Welcome = () => {
               <ul className="mt-4 space-y-2 text-sm dark:text-slate-200">
                 <li>⚡ Real-time editing with auto-save</li>
                 <li>📊 Multiple graphs per account</li>
-                <li>🧊 Export charts as PNG with glass background</li>
+                <li>🧊 Export charts as Image</li>
               </ul>
 
             </div>
@@ -174,7 +174,7 @@ const Welcome = () => {
               <div>
                 <h4 className="font-semibold mb-2 w-full text-center dark:text-white">Export</h4>
                 <p className="text-sm opacity-90 text-center dark:text-slate-200">
-                  Export PNG with the same values and design.
+                  Export Image with the same values and design.
                 </p>
               </div>
             </div>

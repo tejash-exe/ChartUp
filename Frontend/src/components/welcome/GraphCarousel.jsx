@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+// Context
+import AppContext from "../../context/AppContext";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChartBar, faChartLine, faChartPie, faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +17,8 @@ const GRAPH_TYPES = [
 
 const GraphCarousel = ({ graph, defaultGraphType = "Bar", isType = false, isDownload = false }) => {
 
+    const { theme } = useContext(AppContext);
+
     const dropdownRef = useRef(null);
     const chartRef = useRef(null);
 
@@ -25,26 +29,25 @@ const GraphCarousel = ({ graph, defaultGraphType = "Bar", isType = false, isDown
 
     const handleDownloadPng = () => {
         const chart = chartRef.current;
-        if (!chart || typeof chart.toBase64Image !== "function") {
-            const candidate = chart && chart.chart ? chart.chart : null;
-            if (candidate && typeof candidate.toBase64Image === "function") {
-                const url = candidate.toBase64Image();
-                const link = document.createElement("a");
-                link.href = url;
-                link.download = "chart.png";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                return;
-            }
-            console.warn("No chart instance with toBase64Image() found on chartRef.");
-            return;
-        }
+        if (!chart) return;
 
-        const url = chart.toBase64Image();
+        const canvas = chart.canvas;
+
+        const tmp = document.createElement("canvas");
+        tmp.width = canvas.width;
+        tmp.height = canvas.height;
+        const ctx = tmp.getContext("2d");
+
+        const bgColor = theme === "dark" ? "#0b1220" : "#ffffff";
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, tmp.width, tmp.height);
+
+        ctx.drawImage(canvas, 0, 0, tmp.width, tmp.height);
+
+        const url = tmp.toDataURL("image/jpeg", 3.0);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `${(graph && graph.title) || "chart"}.png`;
+        link.download = `${graphs[selectedGraph].title || "chart"}.jpg`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -70,7 +73,7 @@ const GraphCarousel = ({ graph, defaultGraphType = "Bar", isType = false, isDown
         <div className="w-full">
             <div className="flex items-center justify-between mb-3 gap-3 flex-col">
                 <div className="flex justify-between w-full">
-                    
+
                     {isType && (
                         <div className="relative" ref={dropdownRef}>
                             <button onClick={() => setOpen((p) => !p)}
@@ -95,13 +98,13 @@ const GraphCarousel = ({ graph, defaultGraphType = "Bar", isType = false, isDown
                     )}
 
                     {isDownload && (
-                        <button onClick={handleDownloadPng} className="shrink-0 w-8 h-8 outline-none flex items-center border border-white justify-center rounded-full shadow-sm duration-200 cursor-pointer bg-white hover:bg-white/20 hover:backdrop-blur-xs dark:hover:text-white dark:hover:bg-transparent dark:border-gray-400/40" title="Download PNG">
+                        <button onClick={handleDownloadPng} className="shrink-0 w-8 h-8 outline-none flex items-center border border-white justify-center rounded-full shadow-sm duration-200 cursor-pointer bg-white hover:bg-white/20 hover:backdrop-blur-xs dark:hover:text-white dark:hover:bg-transparent dark:border-gray-400/40" title="Download Image">
                             <FontAwesomeIcon icon={faDownload} />
                         </button>
                     )}
 
                     {!isType && !isDownload && (
-                        <button className="shrink-0 invisible w-8 h-8 outline-none flex items-center border border-white justify-center rounded-full shadow-sm duration-200 cursor-pointer bg-white hover:bg-white/20 hover:backdrop-blur-xs" title="Download PNG">
+                        <button className="shrink-0 invisible w-8 h-8 outline-none flex items-center border border-white justify-center rounded-full shadow-sm duration-200 cursor-pointer bg-white hover:bg-white/20 hover:backdrop-blur-xs" title="Download Image">
                             <FontAwesomeIcon icon={faDownload} />
                         </button>
                     )}
