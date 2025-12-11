@@ -132,8 +132,8 @@ const saveGraphs = async (req, res) => {
                     return res.json(new ApiResponse(400, "Each graph item must include an id."));
                 };
 
-                if (!item.label || item.label.length > 20) {
-                    return res.json(new ApiResponse(400, "Each label is required and must be ≤ 20 characters."));
+                if (item.label.length > 20) {
+                    return res.json(new ApiResponse(400, "Each label must be ≤ 20 characters."));
                 };
 
                 if (item.value === undefined || item.value < 0) {
