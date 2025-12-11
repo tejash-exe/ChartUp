@@ -33,12 +33,11 @@ const useLogin = () => {
                     localStorage.setItem("email", result.data.user.email);
                     localStorage.setItem("picture", result.data.user.picture);
                     localStorage.setItem("graphs", result.data.user.graphs);
+                    localStorage.setItem("isAuth", JSON.stringify(true));
                     setName(result.data.user.name);
                     setEmail(result.data.user.email);
                     setPicture(result.data.user.picture);
                     setGraphs(result.data.user.graphs);
-
-                    localStorage.setItem("isAuth", JSON.stringify(true));
                     setIsAuth(true);
                     notify(`Welcome! ${result.data.user.name}`);
                     setSuccess(true);
