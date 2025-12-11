@@ -1,6 +1,6 @@
 // Packages
 import { google } from "googleapis";
-import 'dotenv/config';
+import 'dotenv/config.js';
 
 const clientId = process.env.GOOGLE_CLIENT_ID;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
