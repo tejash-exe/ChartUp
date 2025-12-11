@@ -8,7 +8,7 @@ import { faTv } from "@fortawesome/free-solid-svg-icons";
 
 const ThemeSelector = () => {
 
-    const { theme, setTheme, setThemeOption } = useContext(AppContext);
+    const { theme, setThemeOption, themeOption } = useContext(AppContext);
     const themeDropdownRef = useRef(null);
     const [themeOpen, setThemeOpen] = useState(false);
 
@@ -44,21 +44,21 @@ const ThemeSelector = () => {
                     <button onClick={() => handleThemeChange("light")} className="flex w-full items-center gap-2 px-3 py-2 sm:text-sm text-xs hover:bg-white/80 cursor-pointer dark:text-slate-200 dark:hover:bg-black/80">
                         <FontAwesomeIcon icon={faSun} className="text-[14px]" />
                         <span>Light</span>
-                        {theme === "light" && (
+                        {themeOption === "light" && (
                             <span className="ml-auto text-blue-500">●</span>
                         )}
                     </button>
                     <button onClick={() => handleThemeChange("dark")} className="flex w-full items-center gap-2 px-3 py-2 sm:text-sm text-xs hover:bg-white/80 cursor-pointer dark:text-slate-200 dark:hover:bg-black/80">
                         <FontAwesomeIcon icon={faMoon} className="text-[14px]" />
                         <span>Dark</span>
-                        {theme === "dark" && (
+                        {themeOption === "dark" && (
                             <span className="ml-auto text-blue-500">●</span>
                         )}
                     </button>
                     <button onClick={() => handleThemeChange("system")} className="flex w-full items-center gap-2 px-3 py-2 sm:text-sm text-xs hover:bg-white/80 cursor-pointer dark:text-slate-200 dark:hover:bg-black/80">
                         <FontAwesomeIcon icon={faTv} className="text-[14px]" />
                         <span>System</span>
-                        {theme === "system" && (
+                        {themeOption === "system" && (
                             <span className="ml-auto text-blue-500">●</span>
                         )}
                     </button>
