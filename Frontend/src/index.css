@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Hide arrows for number input (Chrome, Edge, Safari) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide arrows for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* custom scrollbar for labels panel */
+.custom-scroll {
+  scrollbar-width: thin;
+  /* Firefox */
+  scrollbar-color: rgb(255, 255, 255) transparent;
+}
+
+/* Chrome, Edge, Safari */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255);
+  border-radius: 9999px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 255, 255);
+}
+
+/* Remove scrollbar arrows in WebKit browsers (Chrome, Safari, Edge) */
+.custom-scroll::-webkit-scrollbar-button {
+  display: none;
+}
+
+*::-webkit-scrollbar-button {
+  display: none
+}
+
+/* Timer bar animation for notifications */
+@keyframes notification-timer-shrink {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+.notification-timer {
+  animation-name: notification-timer-shrink;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@media (max-height: 578px) and (min-width: 768px) {
+  #mainContainer {
+    flex-direction: column;
+  }
+
+  #page {
+    height: 100%;
+  }
+
+  .module {
+    width: 100%;
+  }
+
+  #hero {
+    flex-direction: row;
+  }
+
+  .heroContainer {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) and (min-height: 578px) {
+  #mainContainer {
+    flex-direction: row;
+  }
+
+}
