@@ -6,7 +6,7 @@ import { useNotifications } from "../context/NotificationContext.jsx";
 const useGraphsPolling = () => {
 
   const { backend_url, setGraphs, unsavedRef, pausePollingRef, isAuth, setIsAuth, setName, setEmail, setPicture } = useContext(AppContext);
-  const { isOnline, isVisible, notify } = useNotifications();
+  const { isOnline, isVisible, notify, isSaving } = useNotifications();
 
   const lastUpdatedRef = useRef(null);
   const timeoutIdRef = useRef(null);
@@ -26,6 +26,11 @@ const useGraphsPolling = () => {
       if (!active) return;
 
       if (!isAuth) {
+        scheduleNext();
+        return;
+      }
+
+      if (isSaving) {
         scheduleNext();
         return;
       }
