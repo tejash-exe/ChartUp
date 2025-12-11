@@ -3,7 +3,7 @@ import { useContext, useRef } from "react";
 import AppContext from "../../context/AppContext.jsx";
 import { useNotifications } from "../../context/NotificationContext.jsx";
 // Hooks
-import markLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
+import useMarkLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate, faDownload, faTrash, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
@@ -20,6 +20,8 @@ const GraphModule = ({ graph }) => {
     const { isAuth, graphs, selectedGraph, setGraphs, setSelectedGraph } = useContext(AppContext);
     const { isSaving, savingError } = useNotifications();
     const chartRef = useRef(null);
+
+    const markLocalEdits = useMarkLocalEdits();
     
     const activeGraph = selectedGraph !== null ? graphs[selectedGraph] : null;
     const graphType = activeGraph?.type || "Bar";

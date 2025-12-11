@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 // Context
 import AppContext from "../../context/AppContext.jsx";
 // Hooks
-import markLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
+import useMarkLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChartColumn, faChartLine, faChartPie } from "@fortawesome/free-solid-svg-icons";
@@ -29,6 +29,8 @@ const GraphTypeSelector = ({ graphType }) => {
 
   const { selectedGraph, setGraphs } = useContext(AppContext);
   const dropdownRef = useRef(null);
+
+  const markLocalEdits = useMarkLocalEdits();
 
   const [open, setOpen] = useState(false);
 
@@ -65,8 +67,8 @@ const GraphTypeSelector = ({ graphType }) => {
   };
 
   const handleSelect = (value) => {
-    setOpen(false);
     handleGraphTypeChange(value);
+    setOpen(false);
   };
 
   return (

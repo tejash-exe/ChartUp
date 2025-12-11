@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 // Context
 import AppContext from "../../context/AppContext.jsx";
 // Hooks
-import markLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
+import useMarkLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +11,8 @@ const TitleInput = () => {
 
     const { graphs, selectedGraph, setGraphs } = useContext(AppContext);
     const titleInputRef = useRef(null);
+
+    const markLocalEdits = useMarkLocalEdits();
 
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 870);
 

@@ -2,7 +2,7 @@ import { useContext } from "react";
 // Context
 import AppContext from "../../context/AppContext.jsx";
 // Hooks
-import markLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
+import useMarkLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -10,6 +10,8 @@ import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 const Label = ({ item, inputRefs }) => {
 
     const { setGraphs, selectedGraph } = useContext(AppContext);
+
+    const markLocalEdits = useMarkLocalEdits();
 
     const handleLabelChange = (id, newLabel) => {
         if (selectedGraph === null) return;

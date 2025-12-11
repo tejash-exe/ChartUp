@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 // Context
 import AppContext from "../../context/AppContext.jsx";
 // Hooks
-import markLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
+import useMarkLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faScroll } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +16,8 @@ const LableModule = ({ graph }) => {
     const scrollRef = useRef(null);
     const inputRefs = useRef({});
     const lastAddedIdRef = useRef(null);
+
+    const markLocalEdits = useMarkLocalEdits();
 
     useEffect(() => {
         const lastId = lastAddedIdRef.current;

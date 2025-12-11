@@ -2,10 +2,15 @@ import { useContext } from "react";
 // Context
 import AppContext from "../context/AppContext";
 
-const markLocalEdits = () => {
+const useMarkLocalEdits = () => {
     const { unsavedRef, pausePollingRef } = useContext(AppContext);
-    unsavedRef.current = true;
-    pausePollingRef.current = Date.now() + 6000;
+
+    const markLocalEdits = () => {
+        unsavedRef.current = true;
+        pausePollingRef.current = Date.now() + 6000;
+    };
+
+    return markLocalEdits;
 };
 
-export default markLocalEdits;
+export default useMarkLocalEdits;

@@ -1,6 +1,8 @@
 import { useEffect, useState, useContext, useRef } from "react";
 // Context
 import AppContext from "../../context/AppContext.jsx";
+// Hooks
+import useMarkLocalEdits from "../../hooks/useMarkLocalEdits.jsx";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -10,6 +12,8 @@ const GraphSelector = () => {
   const { graphs, selectedGraph, setSelectedGraph, setGraphs } = useContext(AppContext);
   const [graphOpen, setGraphOpen] = useState(false);
   const graphDropdownRef = useRef(null);
+
+  const markLocalEdits = useMarkLocalEdits();
 
   const hasGraphs = graphs && graphs.length > 0;
   const currentGraphTitle = hasGraphs && graphs[selectedGraph] ? graphs[selectedGraph].title : "Select graph";
@@ -28,6 +32,8 @@ const GraphSelector = () => {
       setSelectedGraph(updated.length - 1);
       return updated;
     });
+
+    markLocalEdits();
   };
 
   useEffect(() => {
