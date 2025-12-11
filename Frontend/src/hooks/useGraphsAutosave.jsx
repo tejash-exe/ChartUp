@@ -86,7 +86,7 @@ const useGraphsAutosave = () => {
         if (err.name === "AbortError") {
         } else {
           if (err?.message) notify(err.message, 5000, "Warning");
-          console.error("Autosave failed:", err);
+          console.log("Autosave failed:", err);
           setSavingError(true);
         }
       } finally {

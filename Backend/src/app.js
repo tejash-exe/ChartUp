@@ -7,7 +7,7 @@ import "dotenv/config";
 const app = express();
 
 app.use(cors({
-    origin: "https://chart-up.vercel.app",
+    origin: ["https://chart-up.vercel.app", 'http://localhost:5173'],
     credentials: true,
 }));
 
