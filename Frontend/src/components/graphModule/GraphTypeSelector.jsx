@@ -65,8 +65,8 @@ const GraphTypeSelector = ({ graphType }) => {
   };
 
   const handleSelect = (value) => {
-    handleGraphTypeChange(value);
     setOpen(false);
+    handleGraphTypeChange(value);
   };
 
   return (

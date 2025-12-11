@@ -22,7 +22,7 @@ const GraphModule = ({ graph }) => {
     const chartRef = useRef(null);
     
     const activeGraph = selectedGraph !== null ? graphs[selectedGraph] : null;
-    const graphType = activeGraph?.type || "bar";
+    const graphType = activeGraph?.type || "Bar";
 
     const handleDownloadPng = () => {
         const chart = chartRef.current;
