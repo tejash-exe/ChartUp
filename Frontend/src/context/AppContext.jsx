@@ -5,7 +5,7 @@ const AppContext = createContext(null);
 
 export const AppProvider = ({ children }) => {
 
-  const backend_url = "http://localhost:5000";
+  const backend_url = "https://chartup.onrender.com";
 
   const unsavedRef = useRef(false);
   const pausePollingRef = useRef(0);
