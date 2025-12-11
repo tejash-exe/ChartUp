@@ -10,11 +10,15 @@ const useGraphsAutosave = () => {
 
   const saveTimeoutRef = useRef(null);
   const lastSavedSnapshotRef = useRef(null);
+  const graphsRef = useRef(graphs);
+
+  graphsRef.current = graphs;
 
   useEffect(() => {
     if (!isAuth) return;
 
     let active = true;
+    const controller = new AbortController();
 
     const saveLoop = async () => {
       if (!active) return;
@@ -33,12 +37,14 @@ const useGraphsAutosave = () => {
         setIsSaving(true);
         setSavingError(false);
 
-        if (!graphs) {
+        const currentGraphs = graphsRef.current;
+
+        if (!currentGraphs) {
           saveTimeoutRef.current = setTimeout(saveLoop, 5000);
           return;
         }
 
-        const snapshot = JSON.stringify(graphs);
+        const snapshot = JSON.stringify(currentGraphs);
 
         if (lastSavedSnapshotRef.current === snapshot) {
           saveTimeoutRef.current = setTimeout(saveLoop, 5000);
@@ -49,7 +55,8 @@ const useGraphsAutosave = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
-          body: JSON.stringify({ graphs }),
+          signal: controller.signal,
+          body: JSON.stringify({ graphs: currentGraphs }),
         });
 
         const result = await res.json();
@@ -75,9 +82,12 @@ const useGraphsAutosave = () => {
           throw new Error(result);
         }
       } catch (err) {
-        if(err.message) notify(err.message, 5000, "Warning");
-        console.log("Autosave failed :", err);
-        setSavingError(true);
+        if (err.name === "AbortError") {
+        } else {
+          if (err?.message) notify(err.message, 5000, "Warning");
+          console.error("Autosave failed:", err);
+          setSavingError(true);
+        }
       } finally {
         setIsSaving(false);
       }
@@ -91,10 +101,11 @@ const useGraphsAutosave = () => {
 
     return () => {
       active = false;
+      controller.abort();
       clearTimeout(saveTimeoutRef.current);
     };
 
-  }, [graphs, isAuth, backend_url, isOnline, isVisible, unsavedRef]);
+  }, [isAuth, backend_url, isOnline, isVisible]);
 };
 
 export default useGraphsAutosave;
