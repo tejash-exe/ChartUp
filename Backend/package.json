@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "build": "echo \"Error: no test specified\""
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",
