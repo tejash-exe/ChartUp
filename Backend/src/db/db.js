@@ -1,6 +1,6 @@
 // Packages
 import mongoose from "mongoose";
-import "dotenv/config";
+import 'dotenv/config';
 
 const connectToDb = async () => {
     try {

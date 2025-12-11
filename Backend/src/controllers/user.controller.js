@@ -5,7 +5,7 @@ import options from "../utils/CookiesOptions.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import oauth2client from "../utils/googleConfig.js";
 //Packages
-import "dotenv/config";
+import 'dotenv/config';
 
 const generateAccessAndRefreshToken = async (userid) => {
     try {

@@ -4,7 +4,7 @@ import User from "../models/User.model.js";
 import ApiResponse from "../utils/ApiResponse.js";
 // Packages
 import jwt from "jsonwebtoken";
-import "dotenv/config";
+import 'dotenv/config';
 
 const verifyJWTUser = async (req, res, next) => {
     try {
