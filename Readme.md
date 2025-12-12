@@ -155,7 +155,7 @@ If you want improvements, suggestions, or bug fixes — feel free to open an iss
 
 **Aditya Choudhary**
 
-🔗 [LinkedIn](https://www.linkedin.com/in/aditya-choudhary-31137b291/)  
+🔗 [LinkedIn](https://www.linkedin.com/in/aditya-choudhary--/)  
 🐙 [GitHub](https://github.com/tejash-exe)
 
 ## ⭐ Support the Project

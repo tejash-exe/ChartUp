@@ -111,7 +111,7 @@ const Welcome = () => {
 
               <div className="mt-4 flex gap-3">
 
-                <Link to="https://www.linkedin.com/in/aditya-choudhary-31137b291/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-linear-to-r from-blue-400 to-blue-500 text-white text-sm hover:scale-[1.02] duration-200">
+                <Link to="https://www.linkedin.com/in/aditya-choudhary--/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-linear-to-r from-blue-400 to-blue-500 text-white text-sm hover:scale-[1.02] duration-200">
                   <FontAwesomeIcon className='text-base' icon={faLinkedin} />
                   LinkedIn
                 </Link>
