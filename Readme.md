@@ -75,7 +75,7 @@ root
 
 # ⚙️ Backend Environment Variables
 
-Create a `.env` file inside `/backend`:
+Create a `.env` file inside `/Backend`:
 
 ```makeafile
 PORT=
@@ -107,7 +107,7 @@ npm install
 
 ### 2️⃣ Add environment variables
 
-Fill the `.env` file inside `/backend`.
+Fill the `.env` file inside `/Backend`.
 
 ### 3️⃣ Run development servers
 
